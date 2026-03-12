@@ -3,8 +3,8 @@
    ============================================= */
 :root {
   --nav: #2f2f2f;
-  --orange: #f59a1b; /* Tu color de acento */
-  --bg: #e9e7e4; /* Fondo crema institucional */
+  --orange: #f59a1b;
+  --bg: #e9e7e4;
   --title: #1f1f1f;
   --blue: #4983da;
   --purple-bg: #C3AED5;
@@ -25,7 +25,7 @@ body {
 }
 
 /* =============================================
-   1. HEADER
+   1. HEADER Y MENÚ HAMBURGUESA
    ============================================= */
 .nav {
   background: var(--nav);
@@ -46,15 +46,96 @@ body {
 }
 
 .brand__logo { height: clamp(50px, 7vw, 72px); width: auto; }
-.menu { display: flex; gap: clamp(15px, 2.5vw, 50px); }
-.menu a { color: #fff; text-decoration: none; font-weight: 700; font-size: 16px; }
-.btn-dona { background: var(--orange); color: #fff; text-decoration: none; font-weight: 800; padding: 12px 28px; border-radius: 999px; }
 
-@media (max-width: 900px) { .menu { display: none; } }
+.menu { display: flex; gap: clamp(15px, 2.5vw, 50px); }
+.menu a { color: #fff; text-decoration: none; font-weight: 700; font-size: 16px; transition: color 0.3s ease; }
+.menu a:hover { color: var(--orange); }
+
+.nav__right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-dona { 
+  background: var(--orange); 
+  color: #fff; 
+  text-decoration: none; 
+  font-weight: 800; 
+  padding: 12px 28px; 
+  border-radius: 999px; 
+  transition: transform 0.2s, background-color 0.3s;
+}
+.btn-dona:hover { background-color: #d97d00; transform: scale(1.05); }
+
+/* Estilos de la Hamburguesa (Oculta en PC) */
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 101;
+}
+
+.nav__hamburger span {
+  width: 100%;
+  height: 3px;
+  background-color: var(--white);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+/* --- RESPONSIVE HEADER (MÓVILES) --- */
+@media (max-width: 900px) { 
+  .nav__hamburger { display: flex; } 
+  
+  .btn-dona { padding: 10px 20px; font-size: 14px; }
+
+  .menu { 
+    position: absolute;
+    top: 96px; 
+    left: -100%; 
+    width: 100%;
+    background-color: var(--nav);
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0;
+    gap: 30px;
+    transition: left 0.3s ease-in-out;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.5); 
+    z-index: 99;
+  }
+
+  .menu--active { left: 0; }
+
+  /* Animación de la hamburguesa transformándose en "X" */
+  .nav__hamburger--active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+  .nav__hamburger--active span:nth-child(2) { opacity: 0; }
+  .nav__hamburger--active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+}
 
 /* =============================================
-   2. HERO
+   2. HERO (CON ANIMACIONES)
    ============================================= */
+@keyframes subirSuave {
+  from { opacity: 0; transform: translateY(50px) translateX(-50%); } 
+  to { opacity: 1; transform: translateY(0) translateX(-50%); }      
+}
+
+@keyframes aparecerBorroso {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); filter: blur(40px) contrast(100%); } 
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(28px) contrast(120%); }     
+}
+
+@keyframes deslizarLado {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
 .hero {
   position: relative;
   height: calc(100vh - 96px);
@@ -74,6 +155,8 @@ body {
   height: 85%;
   display: flex;
   align-items: flex-end;
+  opacity: 0; 
+  animation: subirSuave 1.2s ease-out forwards; 
 }
 
 .hero__photo { height: 100%; width: auto; filter: grayscale(100%); opacity: 0.9; display: block; }
@@ -88,8 +171,9 @@ body {
   border-radius: 50%;
   background-color: var(--blue);
   mix-blend-mode: multiply;
-  filter: blur(28px) contrast(120%);
   z-index: 10;
+  opacity: 0; 
+  animation: aparecerBorroso 1.5s ease-out 0.8s forwards; 
 }
 
 .hero__text-container {
@@ -101,7 +185,14 @@ body {
   justify-content: space-between;
 }
 
-.hero__title { font-size: clamp(32px, 7vw, 68px); font-weight: 800; color: var(--title); letter-spacing: -1px; }
+.hero__title { 
+  font-size: clamp(32px, 7vw, 68px); 
+  font-weight: 800; 
+  color: var(--title); 
+  letter-spacing: -1px; 
+  opacity: 0;
+  animation: deslizarLado 1s ease-out 1.2s forwards;
+}
 
 @media (max-width: 768px) {
   .hero__text-container { flex-direction: column; gap: 30vh; text-align: center; }
@@ -144,24 +235,8 @@ body {
         grid-template-rows: minmax(50vh, auto) minmax(50vh, auto);
         overflow: visible; 
     }
-
-    .about__split {
-        width: 100%;
-        position: relative;
-        overflow: visible; 
-        min-height: 50vh; 
-    }
-
-    .about__img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; 
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-
+    .about__split { width: 100%; position: relative; overflow: visible; min-height: 50vh; }
+    .about__img { width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; top: 0; left: 0; }
     .about__split--top .about__img { object-position: center bottom; }
     .about__split--bottom .about__img { object-position: center top; }
 }
@@ -169,70 +244,19 @@ body {
 /* =============================================
    5. CONTENIDO INTERNO SECCIÓN ABOUT
    ============================================= */
-.about__overlay {
-    position: relative;
-    width: 100%;
-    min-height: 50vh;
-    display: flex;
-    align-items: flex-start; 
-    padding-inline: 8%; 
-    padding-block: 8vh; 
-    z-index: 10;
-}
+.about__overlay { position: relative; width: 100%; min-height: 50vh; display: flex; align-items: flex-start; padding-inline: 8%; padding-block: 8vh; z-index: 10; }
+.about__content { flex: 1; max-width: 600px; line-height: normal; margin-top: 5vh; }
+.about__content--wide { text-align: right; display: flex; flex-direction: column; align-items: flex-end; max-width: 850px; margin-top: 10vh; }
+.about__empty-space--narrow { flex: 0.4; }
 
-.about__content {
-    flex: 1; 
-    max-width: 600px;
-    line-height: normal;
-    margin-top: 5vh; 
-}
-
-.about__content--wide {
-    text-align: right;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    max-width: 850px; 
-    margin-top: 10vh; 
-}
-
-.about__empty-space--narrow {
-    flex: 0.4; 
-}
-
-/* --- TÍTULOS Y TEXTO --- */
-.about__title {
-    font-family: 'comba', 'Montserrat', sans-serif;
-    font-weight: 800;
-    font-size: clamp(22px, 3vw, 36px); 
-    margin-bottom: 25px;
-    letter-spacing: 2px;
-}
-
-.about__text {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400; 
-    font-size: clamp(15px, 1.8vw, 18px);
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
+.about__title { font-family: 'comba', 'Montserrat', sans-serif; font-weight: 800; font-size: clamp(22px, 3vw, 36px); margin-bottom: 25px; letter-spacing: 2px; }
+.about__text { font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: clamp(15px, 1.8vw, 18px); line-height: 1.6; margin-bottom: 20px; }
 .about__text strong { font-weight: 700; }
 
 .about__title--white, .about__text--white, .about__link--white { color: #ffffff; }
 .about__title--dark, .about__text--dark, .about__link--dark { color: var(--title); }
 
-.about__link {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 800;
-    text-decoration: none;
-    font-size: 18px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px; 
-    transition: transform 0.3s ease;
-}
-
+.about__link { font-family: 'Montserrat', sans-serif; font-weight: 800; text-decoration: none; font-size: 18px; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.3s ease; }
 .about__link:hover { transform: translateX(10px); }
 .icon-arrows { font-size: 14px; }
 
@@ -254,146 +278,46 @@ body {
 .about__char {
     height: auto;
     filter: drop-shadow(0px 15px 15px rgba(0,0,0,0.15));
+    pointer-events: auto; 
 }
 
-.about__char--green {
-    width: clamp(140px, 15vw, 240px); 
-    margin-right: -40px; 
-    margin-top: 40px;    
-    z-index: 2;          
-}
-
-.about__char--pink {
-    width: clamp(160px, 17vw, 280px); 
-    margin-bottom: 80px; 
-    z-index: 1;          
-}
+.about__char--green { width: clamp(140px, 15vw, 240px); margin-right: -40px; margin-top: 40px; z-index: 2; }
+.about__char--pink { width: clamp(160px, 17vw, 280px); margin-bottom: 80px; z-index: 1; }
 
 /* =============================================
    7. SECCIÓN FUNDADORA
    ============================================= */
-.founder {
-  background-color: var(--bg);
-  padding-block: clamp(80px, 12vh, 150px);
-  position: relative;
-  overflow: hidden; 
-}
-
-.founder__inner {
-  width: min(1000px, 85vw);
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: clamp(40px, 6vw, 80px);
-  position: relative;
-  z-index: 10; 
-}
-
-.founder__photo-wrapper {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
-}
-
-.founder__circle {
-  width: clamp(280px, 35vw, 450px);
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.founder__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: grayscale(100%);
-}
-
-.founder__content {
-  flex: 1.2;
-}
-
-.founder__title {
-  font-family: 'comba', sans-serif;
-  font-size: clamp(20px, 2.5vw, 32px);
-  color: var(--title);
-  margin-bottom: 20px;
-}
-
-.founder__quote-container {
-    position: relative;
-    padding-inline: 45px;
-    margin-bottom: 30px;
-    max-width: 550px;
-}
-
-.founder__quote {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: clamp(22px, 3vw, 38px);
-  line-height: 1.2;
-  color: var(--title);
-  text-align: left;
-}
-
-.founder__quote-mark {
-    font-family: 'comba', sans-serif;
-    font-size: clamp(50px, 7vw, 90px);
-    color: #2F2F2F; 
-    position: absolute;
-    line-height: 1;
-    z-index: 1;
-}
-
+.founder { background-color: var(--bg); padding-block: clamp(80px, 12vh, 150px); position: relative; overflow: hidden; }
+.founder__inner { width: min(1000px, 85vw); margin: 0 auto; display: flex; align-items: center; gap: clamp(40px, 6vw, 80px); position: relative; z-index: 10; }
+.founder__photo-wrapper { flex: 1; display: flex; justify-content: flex-end; position: relative; }
+.founder__circle { width: clamp(280px, 35vw, 450px); aspect-ratio: 1/1; border-radius: 50%; overflow: hidden; }
+.founder__img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); }
+.founder__content { flex: 1.2; }
+.founder__title { font-family: 'comba', sans-serif; font-size: clamp(20px, 2.5vw, 32px); color: var(--title); margin-bottom: 20px; }
+.founder__quote-container { position: relative; padding-inline: 45px; margin-bottom: 30px; max-width: 550px; }
+.founder__quote { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: clamp(22px, 3vw, 38px); line-height: 1.2; color: var(--title); text-align: left; }
+.founder__quote-mark { font-family: 'comba', sans-serif; font-size: clamp(50px, 7vw, 90px); color: #2F2F2F; position: absolute; line-height: 1; z-index: 1; }
 .founder__quote-mark--open { top: -20px; left: -10px; }
 .founder__quote-mark--close { bottom: -40px; right: 0; }
-
-.founder__link {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  text-decoration: none;
-  font-size: 18px;
-  color: var(--title);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: transform 0.3s ease;
-}
-
+.founder__link { font-family: 'Montserrat', sans-serif; font-weight: 800; text-decoration: none; font-size: 18px; color: var(--title); display: inline-flex; align-items: center; gap: 8px; transition: transform 0.3s ease; }
 .founder__link:hover { transform: translateX(10px); }
 
 /* =============================================
-   8. PERSONAJES DECORATIVOS FUNDADORA
+   8. PERSONAJES DECORATIVOS FUNDADORA (CORREGIDO)
    ============================================= */
 .founder__decor {
     position: absolute;
     z-index: 1; 
     filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.1));
-    pointer-events: none;
+    pointer-events: auto; 
 }
 
-.founder__decor--center-left {
-    width: clamp(130px, 15vw, 200px); 
-    top: 50%; 
-    left: -220px; 
-    transform: translateY(-50%); 
-}
-
-.founder__decor--top-right { 
-    width: clamp(120px, 14vw, 180px);
-    top: -60px; 
-    right: -200px; 
-}
-
-.founder__decor--bottom-right { 
-    width: clamp(130px, 15vw, 200px);
-    bottom: -80px; 
-    right: -180px; 
-}
+.founder__decor--center-left { width: clamp(130px, 15vw, 200px); top: calc(50% - 100px); left: -220px; }
+.founder__decor--top-right { width: clamp(120px, 14vw, 180px); top: -60px; right: -200px; }
+.founder__decor--bottom-right { width: clamp(130px, 15vw, 200px); bottom: -80px; right: -180px; }
 
 /* =============================================
-   9. RESPONSIVE MÓVIL
+   9. RESPONSIVE MÓVIL (GENERAL)
    ============================================= */
 @media (max-width: 1024px) {
     .about { height: auto; display: flex; flex-direction: column; }
@@ -413,50 +337,13 @@ body {
 /* =============================================
    10. SECCIÓN MISIÓN Y VISIÓN
    ============================================= */
-.mission {
-    background-color: var(--bg);
-    padding-block: 60px 100px;
-    position: relative;
-}
-
-.mission__inner {
-    width: min(1200px, 92vw); 
-    margin: 0 auto;
-    text-align: center;
-}
-
-.mission__title {
-    font-family: 'comba', sans-serif;
-    font-size: clamp(28px, 4vw, 42px);
-    color: var(--title);
-    margin-bottom: 70px; 
-    letter-spacing: 3px;
-}
-
-.mission__grid {
-    display: flex;
-    justify-content: space-between;
-    gap: clamp(60px, 10vw, 120px); 
-    text-align: left;
-}
-
+.mission { background-color: var(--bg); padding-block: 60px 100px; position: relative; }
+.mission__inner { width: min(1200px, 92vw); margin: 0 auto; text-align: center; }
+.mission__title { font-family: 'comba', sans-serif; font-size: clamp(28px, 4vw, 42px); color: var(--title); margin-bottom: 70px; letter-spacing: 3px; }
+.mission__grid { display: flex; justify-content: space-between; gap: clamp(60px, 10vw, 120px); text-align: left; }
 .mission__item { flex: 1; }
-
-.mission__subtitle {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 800;
-    font-size: 24px;
-    color: var(--title);
-    margin-bottom: 20px;
-}
-
-.mission__text {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--title);
-}
-
+.mission__subtitle { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 24px; color: var(--title); margin-bottom: 20px; }
+.mission__text { font-family: 'Montserrat', sans-serif; font-size: 18px; line-height: 1.6; color: var(--title); }
 .mission__text strong { font-weight: 800; }
 
 @media (max-width: 768px) {
@@ -464,37 +351,80 @@ body {
 }
 
 /* =============================================
-   11. SECCIÓN NOTICIAS (ESTILO SLIDER PROFESIONAL)
+   11. SECCIÓN NOTICIAS
    ============================================= */
-.news {
-    padding-block: clamp(80px, 10vh, 120px);
-    background-color: var(--bg); /* Mantenemos el fondo crema institucional */
-    position: relative;
-    overflow: visible; /* Importante para que las tarjetas laterales se asomen */
+.news { padding-block: clamp(80px, 10vh, 120px); background-color: var(--bg); position: relative; overflow: visible; }
+.news__inner { width: min(1400px, 94vw); margin: 0 auto; text-align: center; }
+.news__title { font-family: 'comba', sans-serif; font-size: clamp(32px, 5vw, 52px); color: var(--title); margin-bottom: 60px; letter-spacing: 4px; text-transform: uppercase; }
+.news__container { background: transparent; padding-block: 20px; }
+.elfsight-app-5df08ec0-f3ce-4e50-ba8e-d05f1e2e0d55 { padding-inline: 40px; }
+
+/* =============================================
+   12. SECCIÓN DONA (CTA)
+   ============================================= */
+.cta {
+  background-image: url('img/10.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 850px; 
+  padding: 80px 20px; 
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  text-align: center;
+  color: #ffffff;
 }
 
-.news__inner {
-    width: min(1400px, 94vw); /* Más ancho para el efecto de carrusel de 3 tarjetas */
-    margin: 0 auto;
-    text-align: center;
+.cta__inner { max-width: 800px; margin: 0 auto; }
+.cta__title { font-family: 'comba', sans-serif; font-size: clamp(28px, 4vw, 42px); margin-bottom: 40px; letter-spacing: 1.5px; }
+.cta__btn { display: inline-block; background-color: var(--orange); color: #ffffff; font-family: 'Montserrat', sans-serif; font-size: 2rem; font-weight: 800; text-decoration: none; padding: 15px 90px; border-radius: 50px; margin-bottom: 40px; transition: transform 0.2s, background-color 0.3s; }
+.cta__btn:hover { background-color: #d97d00; transform: scale(1.05); }
+.cta__text { font-family: 'Montserrat', sans-serif; max-width: 550px; margin: 0 auto; font-size: 1.05rem; line-height: 1.6; }
+
+/* =============================================
+   13. FOOTER
+   ============================================= */
+.site-footer { background-color: #333333; color: #ffffff; position: relative; font-family: 'Montserrat', sans-serif; padding-bottom: 60px; }
+.site-footer__color-bar { height: 12px; width: 100%; background: linear-gradient(90deg, #6B8E23 0%, #FFA500 25%, #FF4500 50%, #FF69B4 75%, #4169E1 100%); margin-bottom: 50px; }
+.site-footer__inner { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.site-footer__title { text-align: center; font-size: 1.2rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 50px; }
+.site-footer__grid { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; }
+.site-footer__logo-col { flex: 1; min-width: 250px; }
+.site-footer__logo { max-width: 220px; filter: brightness(0) invert(1) opacity(0.8); }
+.site-footer__social-col { flex: 0.5; min-width: 150px; text-align: center; }
+.site-footer__subtitle { font-size: 1.1rem; font-weight: 500; margin-bottom: 20px; color: #dddddd; }
+.site-footer__social-links { display: flex; justify-content: center; gap: 20px; }
+.site-footer__icon-link { color: #ffffff; transition: transform 0.2s, color 0.2s; }
+.site-footer__icon-link:hover { color: var(--orange); transform: translateY(-3px); }
+.site-footer__icon { width: 28px; height: 28px; }
+.site-footer__contact-col { flex: 1.5; min-width: 300px; }
+.site-footer__contact-list { list-style: none; padding: 0; margin: 0; }
+.site-footer__contact-list li { display: flex; align-items: center; margin-bottom: 15px; font-size: 0.95rem; color: #cccccc; }
+.site-footer__icon-small { width: 20px; height: 20px; margin-right: 15px; flex-shrink: 0; }
+
+@media (max-width: 768px) {
+  .site-footer__grid { flex-direction: column; text-align: center; align-items: center; }
+  .site-footer__contact-list li { justify-content: center; text-align: center; }
 }
 
-.news__title {
-    font-family: 'comba', sans-serif;
-    font-size: clamp(32px, 5vw, 52px);
-    color: var(--title);
-    margin-bottom: 60px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
+/* =============================================
+   14. ANIMACIONES ADICIONALES (AOS & VIBRACIÓN)
+   ============================================= */
+[data-aos] { opacity: 0; transition-property: transform, opacity; }
+
+@keyframes vibrar {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
-.news__container {
-    background: transparent; 
-    padding-block: 20px;
-    /* Sombras eliminadas para que el widget de Elfsight sea el único protagonista */
-}
-
-/* Ajuste específico para que el widget de Elfsight se comporte como tu referencia */
-.elfsight-app-5df08ec0-f3ce-4e50-ba8e-d05f1e2e0d55 {
-    padding-inline: 40px;
-}
+.vibrando { animation: vibrar 0.5s ease-out; }
