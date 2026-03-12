@@ -1,0 +1,500 @@
+/* =============================================
+   VARIABLES GLOBALES Y RESET
+   ============================================= */
+:root {
+  --nav: #2f2f2f;
+  --orange: #f59a1b; /* Tu color de acento */
+  --bg: #e9e7e4; /* Fondo crema institucional */
+  --title: #1f1f1f;
+  --blue: #4983da;
+  --purple-bg: #C3AED5;
+  --white: #ffffff;
+}
+
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--bg);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =============================================
+   1. HEADER
+   ============================================= */
+.nav {
+  background: var(--nav);
+  height: 96px;
+  display: flex;
+  align-items: center;
+  z-index: 100;
+  position: relative;
+}
+
+.nav__inner {
+  width: min(1400px, 92vw);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 20px;
+}
+
+.brand__logo { height: clamp(50px, 7vw, 72px); width: auto; }
+.menu { display: flex; gap: clamp(15px, 2.5vw, 50px); }
+.menu a { color: #fff; text-decoration: none; font-weight: 700; font-size: 16px; }
+.btn-dona { background: var(--orange); color: #fff; text-decoration: none; font-weight: 800; padding: 12px 28px; border-radius: 999px; }
+
+@media (max-width: 900px) { .menu { display: none; } }
+
+/* =============================================
+   2. HERO
+   ============================================= */
+.hero {
+  position: relative;
+  height: calc(100vh - 96px);
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero__photo-container {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  height: 85%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero__photo { height: 100%; width: auto; filter: grayscale(100%); opacity: 0.9; display: block; }
+
+.hero__overlay-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(280px, 45vw, 460px);
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background-color: var(--blue);
+  mix-blend-mode: multiply;
+  filter: blur(28px) contrast(120%);
+  z-index: 10;
+}
+
+.hero__text-container {
+  position: relative;
+  z-index: 20;
+  width: 92%;
+  max-width: 1600px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hero__title { font-size: clamp(32px, 7vw, 68px); font-weight: 800; color: var(--title); letter-spacing: -1px; }
+
+@media (max-width: 768px) {
+  .hero__text-container { flex-direction: column; gap: 30vh; text-align: center; }
+}
+
+/* =============================================
+   3. QUOTE
+   ============================================= */
+.quote {
+  background-color: var(--purple-bg);
+  padding-block: clamp(60px, 8vh, 110px);
+  padding-inline: 5%;
+  margin-top: -1px;
+}
+
+.quote__text {
+  font-weight: 500;
+  font-style: italic;
+  font-size: clamp(16px, 2.2vw, 26px);
+  text-align: center;
+  text-transform: uppercase;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #2f2f2f;
+}
+
+/* =============================================
+   4. ABOUT (ALTURA FLEXIBLE)
+   ============================================= */
+.about {
+    width: 100%;
+    background-color: var(--bg);
+    position: relative; 
+    min-height: 100vh;
+}
+
+@media (min-width: 1025px) {
+    .about {
+        display: grid;
+        grid-template-rows: minmax(50vh, auto) minmax(50vh, auto);
+        overflow: visible; 
+    }
+
+    .about__split {
+        width: 100%;
+        position: relative;
+        overflow: visible; 
+        min-height: 50vh; 
+    }
+
+    .about__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .about__split--top .about__img { object-position: center bottom; }
+    .about__split--bottom .about__img { object-position: center top; }
+}
+
+/* =============================================
+   5. CONTENIDO INTERNO SECCIÓN ABOUT
+   ============================================= */
+.about__overlay {
+    position: relative;
+    width: 100%;
+    min-height: 50vh;
+    display: flex;
+    align-items: flex-start; 
+    padding-inline: 8%; 
+    padding-block: 8vh; 
+    z-index: 10;
+}
+
+.about__content {
+    flex: 1; 
+    max-width: 600px;
+    line-height: normal;
+    margin-top: 5vh; 
+}
+
+.about__content--wide {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    max-width: 850px; 
+    margin-top: 10vh; 
+}
+
+.about__empty-space--narrow {
+    flex: 0.4; 
+}
+
+/* --- TÍTULOS Y TEXTO --- */
+.about__title {
+    font-family: 'comba', 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: clamp(22px, 3vw, 36px); 
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+}
+
+.about__text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400; 
+    font-size: clamp(15px, 1.8vw, 18px);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.about__text strong { font-weight: 700; }
+
+.about__title--white, .about__text--white, .about__link--white { color: #ffffff; }
+.about__title--dark, .about__text--dark, .about__link--dark { color: var(--title); }
+
+.about__link {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    text-decoration: none;
+    font-size: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; 
+    transition: transform 0.3s ease;
+}
+
+.about__link:hover { transform: translateX(10px); }
+.icon-arrows { font-size: 14px; }
+
+/* =============================================
+   6. PERSONAJES FLOTANTES DE LA CURVA
+   ============================================= */
+.about__characters {
+    position: absolute;
+    top: 30%; 
+    right: 8%; 
+    transform: translateY(-50%); 
+    z-index: 50; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; 
+}
+
+.about__char {
+    height: auto;
+    filter: drop-shadow(0px 15px 15px rgba(0,0,0,0.15));
+}
+
+.about__char--green {
+    width: clamp(140px, 15vw, 240px); 
+    margin-right: -40px; 
+    margin-top: 40px;    
+    z-index: 2;          
+}
+
+.about__char--pink {
+    width: clamp(160px, 17vw, 280px); 
+    margin-bottom: 80px; 
+    z-index: 1;          
+}
+
+/* =============================================
+   7. SECCIÓN FUNDADORA
+   ============================================= */
+.founder {
+  background-color: var(--bg);
+  padding-block: clamp(80px, 12vh, 150px);
+  position: relative;
+  overflow: hidden; 
+}
+
+.founder__inner {
+  width: min(1000px, 85vw);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: clamp(40px, 6vw, 80px);
+  position: relative;
+  z-index: 10; 
+}
+
+.founder__photo-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.founder__circle {
+  width: clamp(280px, 35vw, 450px);
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.founder__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+}
+
+.founder__content {
+  flex: 1.2;
+}
+
+.founder__title {
+  font-family: 'comba', sans-serif;
+  font-size: clamp(20px, 2.5vw, 32px);
+  color: var(--title);
+  margin-bottom: 20px;
+}
+
+.founder__quote-container {
+    position: relative;
+    padding-inline: 45px;
+    margin-bottom: 30px;
+    max-width: 550px;
+}
+
+.founder__quote {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: clamp(22px, 3vw, 38px);
+  line-height: 1.2;
+  color: var(--title);
+  text-align: left;
+}
+
+.founder__quote-mark {
+    font-family: 'comba', sans-serif;
+    font-size: clamp(50px, 7vw, 90px);
+    color: #2F2F2F; 
+    position: absolute;
+    line-height: 1;
+    z-index: 1;
+}
+
+.founder__quote-mark--open { top: -20px; left: -10px; }
+.founder__quote-mark--close { bottom: -40px; right: 0; }
+
+.founder__link {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  text-decoration: none;
+  font-size: 18px;
+  color: var(--title);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.3s ease;
+}
+
+.founder__link:hover { transform: translateX(10px); }
+
+/* =============================================
+   8. PERSONAJES DECORATIVOS FUNDADORA
+   ============================================= */
+.founder__decor {
+    position: absolute;
+    z-index: 1; 
+    filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.1));
+    pointer-events: none;
+}
+
+.founder__decor--center-left {
+    width: clamp(130px, 15vw, 200px); 
+    top: 50%; 
+    left: -220px; 
+    transform: translateY(-50%); 
+}
+
+.founder__decor--top-right { 
+    width: clamp(120px, 14vw, 180px);
+    top: -60px; 
+    right: -200px; 
+}
+
+.founder__decor--bottom-right { 
+    width: clamp(130px, 15vw, 200px);
+    bottom: -80px; 
+    right: -180px; 
+}
+
+/* =============================================
+   9. RESPONSIVE MÓVIL
+   ============================================= */
+@media (max-width: 1024px) {
+    .about { height: auto; display: flex; flex-direction: column; }
+    .about__img { display: none; }
+    .about__split { width: 100%; min-height: 300px; padding-inline: 5%; }
+    .about__split--top { background-color: var(--nav); border-bottom-left-radius: 50% 80px; border-bottom-right-radius: 50% 80px; }
+    .about__overlay { flex-direction: column; padding-block: 60px 40px; text-align: center; }
+    .about__content, .about__content--wide { max-width: 100%; text-align: center; align-items: center; margin-top: 0 !important; }
+    .about__empty-space--narrow, .about__characters { display: none; }
+
+    .founder__inner { flex-direction: column; text-align: center; width: 90vw; gap: 40px; }
+    .founder__photo-wrapper { justify-content: center; }
+    .founder__link { justify-content: center; }
+    .founder__decor { display: none; } 
+}
+
+/* =============================================
+   10. SECCIÓN MISIÓN Y VISIÓN
+   ============================================= */
+.mission {
+    background-color: var(--bg);
+    padding-block: 60px 100px;
+    position: relative;
+}
+
+.mission__inner {
+    width: min(1200px, 92vw); 
+    margin: 0 auto;
+    text-align: center;
+}
+
+.mission__title {
+    font-family: 'comba', sans-serif;
+    font-size: clamp(28px, 4vw, 42px);
+    color: var(--title);
+    margin-bottom: 70px; 
+    letter-spacing: 3px;
+}
+
+.mission__grid {
+    display: flex;
+    justify-content: space-between;
+    gap: clamp(60px, 10vw, 120px); 
+    text-align: left;
+}
+
+.mission__item { flex: 1; }
+
+.mission__subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+    color: var(--title);
+    margin-bottom: 20px;
+}
+
+.mission__text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--title);
+}
+
+.mission__text strong { font-weight: 800; }
+
+@media (max-width: 768px) {
+    .mission__grid { flex-direction: column; gap: 50px; text-align: center; }
+}
+
+/* =============================================
+   11. SECCIÓN NOTICIAS (ESTILO SLIDER PROFESIONAL)
+   ============================================= */
+.news {
+    padding-block: clamp(80px, 10vh, 120px);
+    background-color: var(--bg); /* Mantenemos el fondo crema institucional */
+    position: relative;
+    overflow: visible; /* Importante para que las tarjetas laterales se asomen */
+}
+
+.news__inner {
+    width: min(1400px, 94vw); /* Más ancho para el efecto de carrusel de 3 tarjetas */
+    margin: 0 auto;
+    text-align: center;
+}
+
+.news__title {
+    font-family: 'comba', sans-serif;
+    font-size: clamp(32px, 5vw, 52px);
+    color: var(--title);
+    margin-bottom: 60px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.news__container {
+    background: transparent; 
+    padding-block: 20px;
+    /* Sombras eliminadas para que el widget de Elfsight sea el único protagonista */
+}
+
+/* Ajuste específico para que el widget de Elfsight se comporte como tu referencia */
+.elfsight-app-5df08ec0-f3ce-4e50-ba8e-d05f1e2e0d55 {
+    padding-inline: 40px;
+}
