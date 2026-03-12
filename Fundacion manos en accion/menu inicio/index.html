@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fundación Manos en Acción</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;0,800;1,500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://use.typekit.net/lcn6rul.css">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav__inner">
+      <a class="brand" href="#">
+        <img src="img/logo.png" alt="Fundación Manos en Acción" class="brand__logo">
+      </a>
+      <nav class="menu">
+        <a href="#">NOSOTROS</a>
+        <a href="#">OTEC</a>
+        <a href="#">CURSOS</a>
+        <a href="#">NOTICIAS</a>
+        <a href="#">CONTACTO</a>
+      </nav>
+      <a class="btn-dona" href="#">DONA</a>
+    </div>
+  </header>
+
+  <svg style="display: none;">
+    <filter id="grainTexture">
+      <feTurbulence type="fractalNoise" baseFrequency="0.60" numOctaves="3" stitchTiles="stitch" />
+      <feColorMatrix type="saturate" values="0" />
+      <feComposite operator="in" in2="SourceGraphic" />
+      <feBlend mode="multiply" in2="SourceGraphic" />
+    </filter>
+  </svg>
+
+  <main class="hero">
+    <div class="hero__photo-container">
+        <img src="img/1.png" alt="Manos unidas" class="hero__photo">
+    </div>
+    <div class="hero__overlay-circle"></div>
+    <div class="hero__text-container">
+        <h1 class="hero__title hero__title--left">NUESTRO</h1>
+        <h1 class="hero__title hero__title--right">PROPÓSITO</h1>
+    </div>
+  </main>
+
+  <section class="quote">
+    <div class="quote__container">
+      <p class="quote__text">
+        “CREEMOS QUE TODAS LAS PERSONAS PUEDEN SALIR ADELANTE SI SE DAN OPORTUNIDADES Y HERRAMIENTAS. NOS MUEVE TRANSFORMAR REALIDADES.”
+      </p>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="about__split about__split--top">
+      <img src="img/2.png" alt="Historia" class="about__img">
+      <div class="about__overlay">
+          <div class="about__content">
+              <h2 class="about__title about__title--white">NUESTRA HISTORIA</h2>
+              <p class="about__text about__text--white">
+                  Manos en Acción es una fundación sin fines de lucro, creada en 2021 por <strong>Cristina Fuentes Jeria</strong>, que impulsa el desarrollo social en comunidades vulnerables.
+              </p>
+              <p class="about__text about__text--white">
+                  A través de talleres de formación técnica y bienestar, <strong>promovemos el emprendimiento, la reinserción laboral y la justicia social</strong>, siempre bajo un enfoque de igualdad e integración ciudadana.
+              </p>
+              <a href="#" class="about__link about__link--white">
+                  <span class="icon-arrows">▶▶▶</span> Ver mas
+              </a>
+          </div>
+      </div>
+    </div>
+
+    <div class="about__split about__split--bottom">
+      <img src="img/3.png" alt="Nosotros" class="about__img">
+      <div class="about__overlay">
+          <div class="about__empty-space--narrow"></div>
+          <div class="about__content about__content--wide">
+              <h2 class="about__title about__title--dark">¿QUIÉNES SOMOS?</h2>
+              <p class="about__text about__text--dark">
+                  Somos una fundación sin fines de lucro formada por 15 profesionales dedicados al <strong>desarrollo integral en Buin, Paine y El Monte.</strong>
+              </p>
+              <p class="about__text about__text--dark">
+                  A través de talleres de oficio y recreación, nuestro equipo técnico apoya la <strong>reinserción laboral y el bienestar de vecinos de escasos recursos</strong>, con especial foco en adultos mayores, personas con discapacidad y mircroempresas.
+              </p>
+              <a href="#" class="about__link about__link--dark">
+                  <span class="icon-arrows">▶▶▶</span> Ver mas
+              </a>
+          </div>
+      </div>
+    </div>
+
+    <div class="about__characters">
+        <img src="img/4.png" alt="Personaje verde" class="about__char about__char--green">
+        <img src="img/5.png" alt="Personaje rosa" class="about__char about__char--pink">
+    </div>
+  </section>
+
+  <section class="founder">
+    <div class="founder__inner">
+      <img src="img/8.png" class="founder__decor founder__decor--center-left" alt="Personaje Verde">
+      <div class="founder__photo-wrapper">
+        <div class="founder__circle">
+          <img src="img/6.png" alt="Cristina Fuentes Jeria" class="founder__img">
+        </div>
+      </div>
+      <div class="founder__content">
+        <h2 class="founder__title">NUESTRA FUNDADORA</h2>
+        <div class="founder__quote-container">
+            <span class="founder__quote-mark founder__quote-mark--open">“</span>
+            <blockquote class="founder__quote">
+                El progreso real nace de las manos que se atreven a aprender algo nuevo cada día
+            </blockquote>
+            <span class="founder__quote-mark founder__quote-mark--close">”</span>
+        </div>
+        <a href="#" class="founder__link">
+          <span class="icon-arrows">▶▶▶</span> Ver mas
+        </a>
+      </div>
+      <img src="img/7.png" class="founder__decor founder__decor--top-right" alt="Personaje Naranja">
+      <img src="img/9.png" class="founder__decor founder__decor--bottom-right" alt="Personaje Rosa">
+    </div>
+  </section>
+
+  <section class="mission">
+    <div class="mission__inner">
+      <h2 class="mission__title">MISIÓN Y VISIÓN</h2>
+      <div class="mission__grid">
+        <div class="mission__item">
+          <h3 class="mission__subtitle">Misión</h3>
+          <p class="mission__text">
+            Impulsar el <strong>desarrollo integral y la autonomía</strong> familiar a través de herramientas que generen bienestar y estabilidad económica.
+          </p>
+        </div>
+        <div class="mission__item">
+          <h3 class="mission__subtitle">Visión</h3>
+          <p class="mission__text">
+            Apostamos por un mundo equitativo donde todos vivan con dignidad. Logramos esto a través de <strong>capacitaciones gratuitas</strong> que entregan herramientas reales para que cada vecino pueda progresar.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="news">
+    <div class="news__inner">
+      <h2 class="news__title">NOTICIAS</h2>
+      <div class="news__container">
+          <div class="elfsight-app-5df08ec0-f3ce-4e50-ba8e-d05f1e2e0d55" data-elfsight-app-lazy></div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://elfsightcdn.com/platform.js" async></script>
+</body>
+</html>
