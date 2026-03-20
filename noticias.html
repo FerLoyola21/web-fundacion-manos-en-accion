@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noticias - Fundación Manos en Acción</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;0,800;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.typekit.net/lcn6rul.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* Definición del nuevo degradado verde solicitado */
+    :root {
+      --green-main: #567D20;
+      --gold-edge: #AA920E;
+      --green-gradient: linear-gradient(90deg, #AA920E 0%, #567D20 50%, #AA920E 100%);
+      --orange: #FE6612;
+    }
+
+    body { overflow-x: hidden; }
+
+    /* --- PERSONAJES GIGANTES --- */
+    .char-float {
+      position: absolute;
+      z-index: 1;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      width: 180px !important;
+    }
+    .pos-left { left: 0; }
+    .pos-right { right: 0; }
+
+    .section-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      position: relative;
+      z-index: 5;
+    }
+
+    /* --- BANNER VERDE CON DEGRADADO --- */
+    .quote-green-gradient {
+      background: var(--green-gradient) !important;
+      padding: 100px 0;
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      margin-top: 50px;
+    }
+
+    .social-card {
+      background: white;
+      border-radius: 30px;
+      padding: 30px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+      text-align: center;
+      border-bottom: 6px solid var(--green-main);
+    }
+
+    .social-card--ig { border-bottom-color: #E1306C; }
+
+    .social-icon-big {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .char-float { display: none !important; }
+      .section-wrapper { padding: 0 30px !important; }
+      .quote-green-gradient { padding: 60px 20px !important; }
+      .mission__title { font-size: 1.8rem !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav__inner">
+      <a class="brand" href="index.html">
+        <img src="img/logo.png" alt="Logo" class="brand__logo">
+      </a>
+      <nav class="menu">
+        <a href="index.html">INICIO</a> <a href="nosotros.html">NOSOTROS</a>
+        <a href="otec.html">OTEC</a>
+        <a href="cursos.html">TALLERES</a>
+        <a href="noticias.html" style="color: var(--orange);">NOTICIAS</a> <a href="contacto.html">CONTACTO</a>
+      </nav>
+      <div class="nav__right">
+        <a class="btn-dona" href="donar.html">DONA</a>
+        <button class="nav__hamburger" id="btn-hamburger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="quote quote-green-gradient">
+    <div class="quote__container" data-aos="zoom-in" style="text-align: center;">
+      <h2 class="mission__title" style="color: white; letter-spacing: 2px;">NOTICIAS Y NOVEDADES</h2>
+      <p class="quote__text" style="color: white; opacity: 0.9;">¡ENTÉRATE DE TODO LO QUE ESTAMOS HACIENDO!</p>
+    </div>
+  </section>
+
+  <section class="mission" style="position: relative; padding: 100px 0;">
+    <img src="img/12.png" class="char-float pos-left" style="top: 15%;" alt="Decor">
+    <img src="img/11.png" class="char-float pos-right" style="bottom: 10%;" alt="Decor">
+
+    <div class="section-wrapper">
+      <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+        <h2 class="mission__title" data-aos="fade-up">¡NUESTRAS REDES SOCIALES!</h2>
+        <p class="mission__text" data-aos="fade-up">
+          Síguenos para conocer de cerca el trabajo de nuestra comunidad y las últimas novedades de la fundación.
+        </p>
+      </div>
+
+      <div class="social-grid">
+        <article class="social-card" data-aos="fade-right">
+          <svg class="social-icon-big" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <h3 class="mission__subtitle">Facebook Oficial</h3>
+          <a href="https://www.facebook.com/TU_CUENTA" target="_blank" class="btn-dona" style="display: inline-block; background: #1877F2 !important; border: none; margin-top: 15px;">IR A FACEBOOK</a>
+        </article>
+
+        <article class="social-card social-card--ig" data-aos="fade-left">
+          <svg class="social-icon-big" viewBox="0 0 24 24" fill="#E1306C"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          <h3 class="mission__subtitle">Instagram Oficial</h3>
+          <a href="https://www.instagram.com/TU_CUENTA" target="_blank" class="btn-dona" style="display: inline-block; background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%) !important; border: none; margin-top: 15px;">IR A INSTAGRAM</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+<footer id="contacto" class="site-footer">
+    <div class="site-footer__color-bar"></div>
+    <div class="site-footer__inner">
+      <h2 class="site-footer__title">FUNDACIÓN MANOS EN ACCIÓN Y CAPACITACIÓN</h2>
+      <div class="site-footer__grid">
+        <div class="site-footer__logo-col">
+          <img src="img/logo.png" alt="Logo Fundación Manos en Acción" class="site-footer__logo">
+        </div>
+        <div class="site-footer__social-col">
+          <h3 class="site-footer__subtitle">¡Síguenos!</h3>
+          <div class="site-footer__social-links">
+            <a href="#" aria-label="Facebook" class="site-footer__icon-link">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="site-footer__icon"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram" class="site-footer__icon-link">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="site-footer__icon"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="site-footer__contact-col">
+          <h3 class="site-footer__subtitle">Contacto</h3>
+          <ul class="site-footer__contact-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="site-footer__icon-small"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+              <span>+56 44 297 0455</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="site-footer__icon-small"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <span>Buin@fundacionmanosenaccion.cl</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="site-footer__icon-small"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <span>Ramon Freire 194, Buin Esquina Calle Carlos Condell</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ once: true, duration: 800 });
+    const btnHamburger = document.getElementById('btn-hamburger');
+    const menuMobile = document.querySelector('.menu');
+    btnHamburger.addEventListener('click', () => {
+      menuMobile.classList.toggle('menu--active');
+    });
+  </script>
+</body>
+</html>

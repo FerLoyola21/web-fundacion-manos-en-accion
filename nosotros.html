@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiénes Somos - Fundación Manos en Acción</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;0,800;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.typekit.net/lcn6rul.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* Definición del degradado rosa solicitado */
+    :root {
+      --pink-main: #FD5C59;
+      --pink-edge: #FA8390;
+      --pink-gradient: linear-gradient(90deg, #FA8390 0%, #FD5C59 50%, #FA8390 100%);
+      --orange: #FE6612;
+    }
+
+    body { overflow-x: hidden; }
+
+    /* --- PERSONAJES GIGANTES --- */
+    .char-float {
+      position: absolute;
+      z-index: 1;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      width: 180px !important;
+    }
+    .pos-left { left: 0; }
+    .pos-right { right: 0; }
+
+    /* --- CONTENEDOR PRINCIPAL --- */
+    .section-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      position: relative;
+      z-index: 5;
+    }
+
+    /* --- ESTILO DEL BANNER CON DEGRADADO ROSA --- */
+    .quote-pink-gradient {
+      background: var(--pink-gradient) !important;
+      padding: 100px 0;
+    }
+
+    /* --- DISEÑO HORIZONTAL FUNDADORA --- */
+    .founder-flex {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      text-align: left;
+    }
+    .founder-flex .founder__photo-wrapper { flex: 0 0 350px; }
+    .founder-flex .founder__content { flex: 1; }
+
+    /* --- ESTILOS DE EQUIPO --- */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      margin-top: 40px;
+    }
+    .team-card__img {
+      width: 150px; height: 150px;
+      border-radius: 50%; object-fit: cover;
+      margin: 0 auto 20px; display: block;
+      border: 5px solid var(--purple-bg);
+    }
+    .team-list-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 15px; margin-top: 30px;
+      text-align: left;
+    }
+    .team-list-item {
+      background: var(--white);
+      padding: 15px 20px; border-radius: 15px;
+      border-left: 6px solid var(--orange);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      display: flex; align-items: center;
+    }
+
+    /* --- RESPONSIVE CORREGIDO --- */
+    @media (max-width: 992px) {
+      .founder-flex { flex-direction: column; text-align: center; gap: 40px; }
+      .char-float { width: 140px !important; }
+    }
+
+    @media (max-width: 768px) {
+      .char-float { display: none !important; } /* Desaparecen en celular */
+      
+      .section-wrapper { 
+        padding: 0 30px !important; /* Margen lateral aumentado para que no se pegue al borde */
+      }
+
+      .quote-pink-gradient { 
+        padding: 60px 20px !important; 
+      }
+      
+      .mission__title { 
+        font-size: 1.8rem !important; 
+        margin-bottom: 25px !important;
+        line-height: 1.2;
+      }
+
+      .mission__text {
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 20px !important;
+      }
+
+      .founder-flex .founder__photo-wrapper {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+      }
+
+      /* Darle espacio a las secciones en móvil */
+      .mission, .founder {
+        padding: 60px 0 !important;
+      }
+
+      .team-grid {
+        gap: 30px;
+      }
+      
+      .team-list-item {
+        margin: 0 5px; /* Pequeño margen extra para las cajas de miembros */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav__inner">
+      <a class="brand" href="index.html">
+        <img src="img/logo.png" alt="Logo" class="brand__logo">
+      </a>
+      <nav class="menu">
+        <a href="index.html">INICIO</a>
+        <a href="nosotros.html" style="color: var(--orange);">NOSOTROS</a>
+        <a href="otec.html">OTEC</a>
+        <a href="cursos.html">TALLERES</a>
+        <a href="noticias.html">NOTICIAS</a>
+        <a href="contacto.html">CONTACTO</a>
+      </nav>
+      <div class="nav__right">
+        <a class="btn-dona" href="donar.html">DONA</a>
+        <button class="nav__hamburger" id="btn-hamburger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="quote quote-pink-gradient">
+    <div class="quote__container" data-aos="zoom-in" style="text-align: center;">
+      <h2 class="mission__title" style="color: white; letter-spacing: 2px;">NUESTRA HISTORIA</h2>
+      <p class="quote__text" style="color: white; opacity: 0.9;">CONOCE QUIÉNES ESTÁN DETRÁS DE ESTE GRAN PROYECTO QUE BUSCA TRANSFORMAR REALIDADES.</p>
+    </div>
+  </section>
+
+  <section class="mission" style="position: relative;">
+    <img src="img/13.png" class="char-float pos-right" style="top: 15%; width: 240px !important;" alt="Char">
+    <div class="section-wrapper">
+      <h2 class="mission__title" data-aos="fade-up" style="text-align: center;">NUESTROS PRINCIPIOS</h2>
+      <div class="mission__item" data-aos="fade-up" data-aos-delay="100">
+        <p class="mission__text">Somos una Fundación sin fines de lucro, de derecho privado, compuesta por 15 miembros. Buscamos contribuir al desarrollo de las personas entregando oportunidades de talleres de oficio y de entretención, y así ir mejorando las condiciones para las mujeres, hombres y adultos mayores de escasos recursos.</p>
+        <p class="mission__text"><strong>Manos en Acción</strong> es una fundación creada el año 2021 por la ex funcionaria pública <strong>Cristina Fuentes Jeria</strong>, abierta, no partidaria, que se inspira en los valores y obra de su fundadora.</p>
+        <p class="mission__text"><strong>Nuestro sello</strong> es priorizar la participación, el emprendimiento laboral, la reinserción y la entretención. Nuestros valores son ayudar al más vulnerable, la justicia social, igualdad de género y el reconocimiento a la integración.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="founder" style="background-color: #2F2F2F; position: relative;">
+    <img src="img/11.png" class="char-float pos-left" style="top: 10%;" alt="Char">
+    <img src="img/12.png" class="char-float pos-right" style="top: 10%;" alt="Char">
+    <img src="img/14.png" class="char-float pos-right" style="bottom: 10%;" alt="Char">
+
+    <div class="section-wrapper">
+      <div class="founder-flex">
+        <div class="founder__photo-wrapper" data-aos="fade-right">
+          <div class="founder__circle">
+            <img src="img/6.png" alt="Cristina Fuentes" class="founder__img">
+          </div>
+        </div>
+        
+        <div class="founder__content" data-aos="fade-left" data-aos-delay="200">
+          <h2 class="founder__title" style="color: #ffffff;">CRISTINA FUENTES JERIA</h2>
+          <h3 class="mission__subtitle" style="margin-bottom: 20px; color: #ffffff;">Presidenta y Fundadora</h3>
+          <p class="mission__text" style="margin-bottom: 15px; color: #ffffff;">Nace en la ciudad de Melipilla el 12 de noviembre de 1959. Su infancia la vivió en Chocalán junto a su abuelita materna de donde heredó las manualidades, costura, tejido y pintura.</p>
+          <p class="mission__text" style="margin-bottom: 15px; color: #ffffff;">Con una vasta trayectoria en el servicio público, trabajó en la Municipalidad de Santiago, Arica, y en la Dirección del Trabajo como Fiscalizadora de Terreno. Se jubiló a los 65 años contando con <strong style="color: var(--orange);">45 años como Servidora Pública</strong>.</p>
+          <p class="mission__text" style="color: #ffffff;">Fundó en 2021 Manos en Acción, con el objetivo de ayudar a las personas a reintegrarse en el ámbito laboral dictando talleres, creando un lugar acogedor donde todos se sientan como en casa con mucho cariño y amor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mission" style="padding-top: 70px;">
+    <div class="mission__inner section-wrapper">
+      <h2 class="mission__title" data-aos="fade-up" style="text-align: center;">NUESTRO DIRECTORIO</h2>
+      <div class="team-grid">
+        <div class="mission__item" style="text-align: center;" data-aos="zoom-in">
+          <img src="img/6.png" alt="Cristina" class="team-card__img">
+          <h3 class="mission__subtitle">Cristina Fuentes Jeria</h3>
+          <p class="mission__text" style="color: var(--blue); font-weight: 700;">Fundadora y Directora General Ejecutiva</p>
+        </div>
+        <div class="mission__item" style="text-align: center;" data-aos="zoom-in" data-aos-delay="100">
+          <img src="img/temporal.png" alt="Fernanda" class="team-card__img">
+          <h3 class="mission__subtitle">Fernanda Isabel González V.</h3>
+          <p class="mission__text" style="color: var(--blue); font-weight: 700;">Directora de Asuntos Jurídicos y RR.II.</p>
+        </div>
+        <div class="mission__item" style="text-align: center;" data-aos="zoom-in" data-aos-delay="200">
+          <img src="img/temporal.png" alt="Elisa" class="team-card__img">
+          <h3 class="mission__subtitle">Elisa Meneses Ruiz</h3>
+          <p class="mission__text" style="color: var(--blue); font-weight: 700;">Directora Ejecutiva Sede Paine</p>
+        </div>
+        <div class="mission__item" style="text-align: center;" data-aos="zoom-in" data-aos-delay="300">
+          <img src="img/temporal.png" alt="Jose Luis" class="team-card__img">
+          <h3 class="mission__subtitle">Jose Luis Rodríguez P.</h3>
+          <p class="mission__text" style="color: var(--blue); font-weight: 700;">Director Ejecutivo de Innovación</p>
+        </div>
+        <div class="mission__item" style="text-align: center;" data-aos="zoom-in" data-aos-delay="400">
+          <img src="img/temporal.png" alt="Mabel" class="team-card__img">
+          <h3 class="mission__subtitle">Mabel del Carmen Zúñiga R.</h3>
+          <p class="mission__text" style="color: var(--blue); font-weight: 700;">Secretaria</p>
+        </div>
+        <div class="mission__item" style="text-align: center;" data-aos="zoom-in" data-aos-delay="500">
+          <img src="img/temporal.png" alt="Alejandro" class="team-card__img">
+          <h3 class="mission__subtitle">Alejandro Díaz Navarro</h3>
+          <p class="mission__text" style="color: var(--blue); font-weight: 700;">Tesorero</p>
+        </div>
+      </div>
+
+      <h2 class="mission__title" style="margin-top: 80px; text-align: center;">NUESTROS MIEMBROS</h2>
+      <div class="team-list-grid" data-aos="fade-up">
+        <div class="team-list-item"><h3 class="mission__text" style="font-weight: 800; margin-bottom: 0;">Carlos Peña Zamora</h3></div>
+        <div class="team-list-item"><h3 class="mission__text" style="font-weight: 800; margin-bottom: 0;">Cesar Vásquez Carraha</h3></div>
+        <div class="team-list-item"><h3 class="mission__text" style="font-weight: 800; margin-bottom: 0;">Christian Rebolledo Aguirre</h3></div>
+        <div class="team-list-item"><h3 class="mission__text" style="font-weight: 800; margin-bottom: 0;">Paulina Cordero Jury</h3></div>
+        <div class="team-list-item"><h3 class="mission__text" style="font-weight: 800; margin-bottom: 0;">Karen Vera Soto</h3></div>
+        <div class="team-list-item"><h3 class="mission__text" style="font-weight: 800; margin-bottom: 0;">Paulina Acosta Ritter</h3></div>
+        <div class="team-list-item"><h3 class="mission__text" style="font-weight: 800; margin-bottom: 0;">Paula Irarrazabal Allendes</h3></div>
+        <div class="team-list-item"><h3 class="mission__text" style="font-weight: 800; margin-bottom: 0;">Sandra Díaz Jerez</h3></div>
+        <div class="team-list-item"><h3 class="mission__text" style="font-weight: 800; margin-bottom: 0;">Tamara Hurtado</h3></div>
+        <div class="team-list-item"><h3 class="mission__text" style="font-weight: 800; margin-bottom: 0;">María Cecilia Rozas Ramírez</h3></div>
+      </div>
+    </div>
+  </section>
+
+<footer id="contacto" class="site-footer">
+    <div class="site-footer__color-bar"></div>
+    <div class="site-footer__inner">
+      <h2 class="site-footer__title">FUNDACIÓN MANOS EN ACCIÓN Y CAPACITACIÓN</h2>
+      <div class="site-footer__grid">
+        <div class="site-footer__logo-col">
+          <img src="img/logo.png" alt="Logo Fundación Manos en Acción" class="site-footer__logo">
+        </div>
+        <div class="site-footer__social-col">
+          <h3 class="site-footer__subtitle">¡Síguenos!</h3>
+          <div class="site-footer__social-links">
+            <a href="#" aria-label="Facebook" class="site-footer__icon-link">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="site-footer__icon"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram" class="site-footer__icon-link">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="site-footer__icon"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="site-footer__contact-col">
+          <h3 class="site-footer__subtitle">Contacto</h3>
+          <ul class="site-footer__contact-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="site-footer__icon-small"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+              <span>+56 44 297 0455</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="site-footer__icon-small"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <span>Buin@fundacionmanosenaccion.cl</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="site-footer__icon-small"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <span>Ramon Freire 194, Buin Esquina Calle Carlos Condell</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ once: true, duration: 800 });
+    const btnHamburger = document.getElementById('btn-hamburger');
+    const menuMobile = document.querySelector('.menu');
+    btnHamburger.addEventListener('click', () => {
+      menuMobile.classList.toggle('menu--active');
+      btnHamburger.classList.toggle('nav__hamburger--active');
+    });
+  </script>
+</body>
+</html>
