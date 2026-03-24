@@ -14,6 +14,52 @@
   <link rel="stylesheet" href="styles.css" />
 
   <style>
+    /* --- FIX DESBORDAMIENTO HORIZONTAL (AGREGADO) --- */
+    *, *::before, *::after {
+      box-sizing: border-box !important;
+    }
+    html, body {
+      overflow-x: hidden !important;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+
+    /* --- LÓGICA DE LOGOS Y HEADER RESPONSIVE (AGREGADO) --- */
+    .brand__logo--mobile { display: none; }
+
+    @media (max-width: 1150px) {
+      .menu { display: none !important; }
+      .nav__hamburger { 
+        display: flex !important; 
+        flex-direction: column; 
+        justify-content: space-between; 
+        height: 24px; 
+      }
+      .nav__inner { padding: 0 20px !important; }
+      
+      .menu.menu--active { 
+        display: flex !important; 
+        flex-direction: column; 
+        position: absolute; 
+        top: 100%; left: 0; width: 100%; 
+        background: #2F2F2F; 
+        padding: 20px 0; gap: 15px; text-align: center;
+        z-index: 100;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      }
+    }
+
+    @media (max-width: 580px) {
+      .brand__logo--desktop { display: none !important; }
+      .brand__logo--mobile { 
+        display: block !important; 
+        height: 50px; 
+        width: auto; 
+      }
+    }
+
     /* Degradado Naranja para Donaciones */
     :root {
       --dona-main: #FE6612;
@@ -21,8 +67,6 @@
       --dona-gradient: linear-gradient(90deg, #FA9307 0%, #FE6612 50%, #FA9307 100%);
       --orange: #FE6612;
     }
-
-    body { overflow-x: hidden; }
 
     /* --- PERSONAJES GIGANTES --- */
     .char-float {
@@ -100,7 +144,8 @@
   <header class="nav">
     <div class="nav__inner">
       <a class="brand" href="index.html">
-        <img src="img/logo.png" alt="Logo" class="brand__logo">
+        <img src="img/logo.png" alt="Logo Desktop" class="brand__logo brand__logo--desktop">
+        <img src="img/logo-2.png" alt="Logo Mobile" class="brand__logo brand__logo--mobile">
       </a>
       <nav class="menu">
         <a href="index.html">INICIO</a>
@@ -154,7 +199,7 @@
     </div>
   </section>
 
-<footer id="contacto" class="site-footer">
+  <footer id="contacto" class="site-footer">
     <div class="site-footer__color-bar"></div>
     <div class="site-footer__inner">
       <h2 class="site-footer__title">FUNDACIÓN MANOS EN ACCIÓN Y CAPACITACIÓN</h2>
@@ -182,7 +227,7 @@
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="site-footer__icon-small"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-              <span>Buin@fundacionmanosenaccion.cl</span>
+              <span>fundacionmanosenaccionbuin@gmail.com</span>
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="site-footer__icon-small"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>

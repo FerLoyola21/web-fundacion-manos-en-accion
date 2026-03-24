@@ -12,20 +12,77 @@
   <link rel="stylesheet" href="https://use.typekit.net/lcn6rul.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* --- FIX DESBORDAMIENTO HORIZONTAL --- */
+    *, *::before, *::after {
+      box-sizing: border-box !important;
+    }
+    html, body {
+      overflow-x: hidden !important;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+
+    /* --- LÓGICA DE LOGOS --- */
+    .brand__logo--mobile { display: none; }
+
+    /* --- FIX MENU RESPONSIVE (CORREGIDO) --- */
+    @media (max-width: 1150px) {
+      .menu { display: none !important; } /* Oculta menú de texto para que no choque */
+      
+      /* Devuelve el botón de hamburguesa sin romper sus rayitas */
+      .nav__hamburger { 
+        display: flex !important; 
+        flex-direction: column; 
+        justify-content: space-between; 
+        height: 24px; /* Altura segura para que las rayas no colapsen */
+      }
+      
+      .nav__inner { padding: 0 20px !important; }
+
+      /* Formato del menú desplegable cuando está activo en este tamaño intermedio */
+      .menu.menu--active { 
+        display: flex !important; 
+        flex-direction: column; 
+        position: absolute; 
+        top: 100%; left: 0; width: 100%; 
+        background: #2F2F2F; 
+        padding: 20px 0; gap: 15px; text-align: center;
+        z-index: 100;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      }
+    }
+
+    /* Cambio al logo de celular */
+    @media (max-width: 580px) {
+      .brand__logo--desktop { display: none !important; }
+      .brand__logo--mobile { 
+        display: block !important; 
+        height: 50px; 
+        width: auto; 
+      }
+    }
+  </style>
 </head>
 <body>
 
   <header class="nav">
     <div class="nav__inner">
       <a class="brand" href="index.html">
-        <img src="img/logo.png" alt="Fundación Manos en Acción" class="brand__logo">
+        <img src="img/logo.png" alt="Fundación Manos en Acción (Desktop)" class="brand__logo brand__logo--desktop">
+        <img src="img/logo-2.png" alt="Fundación Manos en Acción (Mobile)" class="brand__logo brand__logo--mobile">
       </a>
       
       <nav class="menu">
         <a href="index.html" style="color: var(--orange);">INICIO</a>
         <a href="nosotros.html">NOSOTROS</a>
-        <a href="#">OTEC</a>
-        <a href="cursos.html">TALLERES</a> <a href="noticias.html">NOTICIAS</a> <a href="contacto.html">CONTACTO</a> </nav>
+        <a href="otec.html">OTEC</a>
+        <a href="cursos.html">TALLERES</a> 
+        <a href="noticias.html">NOTICIAS</a> 
+        <a href="contacto.html">CONTACTO</a> </nav>
       
       <div class="nav__right">
         <a class="btn-dona" href="donar.html">DONA</a>
@@ -201,7 +258,7 @@
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="site-footer__icon-small"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-              <span>Buin@fundacionmanosenaccion.cl</span>
+              <span>fundacionmanosenaccionbuin@gmail.com</span>
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="site-footer__icon-small"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>

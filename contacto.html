@@ -14,17 +14,149 @@
   <link rel="stylesheet" href="styles.css" />
 
   <style>
-    /* Degradado Azul/Violeta solicitado */
+    *, *::before, *::after {
+      box-sizing: border-box !important;
+    }
+    
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden !important;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    main, section, header, footer, .nav, .nav__inner, .quote, .mission, .site-footer {
+      max-width: 100%;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
     :root {
       --contact-main: #4983DA;
       --contact-edge: #C3AED5;
       --contact-gradient: linear-gradient(90deg, #C3AED5 0%, #4983DA 50%, #C3AED5 100%);
-      --orange: #FE6612;
+      --orange: #f59a1b;
+      --white: #ffffff;
+      --nav-dark: #2f2f2f;
     }
 
-    body { overflow-x: hidden; }
+    .brand__logo--mobile {
+      display: none;
+    }
 
-    /* --- PERSONAJES GIGANTES (Misma gráfica que el resto) --- */
+    /* BOTÓN DONA */
+    .btn-dona {
+      background: var(--orange) !important;
+      color: var(--white) !important;
+      text-decoration: none !important;
+      font-weight: 800 !important;
+      padding: 12px 28px !important;
+      border-radius: 999px !important;
+      border: none !important;
+      box-shadow: none !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      line-height: 1 !important;
+      transition: transform 0.2s, background-color 0.3s !important;
+    }
+
+    .btn-dona:hover {
+      background-color: #d97d00 !important;
+      color: var(--white) !important;
+      transform: scale(1.05);
+    }
+
+    /* HEADER RESPONSIVE */
+    @media (max-width: 1150px) {
+      .menu {
+        display: none !important;
+      }
+      
+      .nav__hamburger {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 21px;
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        cursor: pointer;
+        box-shadow: none !important;
+      }
+      
+      .nav__hamburger span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        border-radius: 10px;
+        background: var(--white) !important;
+        opacity: 1 !important;
+        transition: all 0.3s ease;
+      }
+
+      .nav__inner {
+        padding: 0 20px !important;
+      }
+      
+      .menu.menu--active {
+        display: flex !important;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--nav-dark);
+        padding: 20px 0;
+        gap: 15px;
+        text-align: center;
+        z-index: 100;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      }
+      
+      .menu.menu--active a {
+        color: white !important;
+      }
+
+      .nav__hamburger--active span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+      }
+
+      .nav__hamburger--active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .nav__hamburger--active span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+      }
+    }
+
+    @media (max-width: 580px) {
+      .brand__logo--desktop {
+        display: none !important;
+      }
+
+      .brand__logo--mobile {
+        display: block !important;
+        height: 50px;
+        width: auto;
+      }
+
+      .btn-dona {
+        padding: 10px 20px !important;
+        font-size: 14px !important;
+      }
+    }
+
+    /* RESTO */
     .char-float {
       position: absolute;
       z-index: 1;
@@ -32,6 +164,7 @@
       transition: all 0.3s ease;
       width: 200px !important;
     }
+
     .pos-left { left: 0; }
     .pos-right { right: 0; }
 
@@ -48,7 +181,6 @@
       padding: 100px 0;
     }
 
-    /* --- DISEÑO DE CONTACTO INTEGRADO --- */
     .contact-grid {
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
@@ -65,7 +197,9 @@
       border: 1px solid rgba(0,0,0,0.05);
     }
 
-    .form-group { margin-bottom: 20px; }
+    .form-group {
+      margin-bottom: 20px;
+    }
 
     .form-input {
       width: 100%;
@@ -77,9 +211,14 @@
       outline: none;
     }
 
-    .form-input:focus { border-color: var(--contact-main); }
+    .form-input:focus {
+      border-color: var(--contact-main);
+    }
 
-    textarea.form-input { height: 150px; resize: none; }
+    textarea.form-input {
+      height: 150px;
+      resize: none;
+    }
 
     .btn-send {
       background: var(--orange);
@@ -95,23 +234,62 @@
       transition: transform 0.2s;
     }
 
-    .btn-send:hover { transform: scale(1.05); }
-
-    .info-title { color: var(--contact-main); font-weight: 700; margin-bottom: 10px; text-transform: uppercase; }
-    .info-h2 { font-size: 2.5rem; color: #2F2F2F; margin-bottom: 30px; font-weight: 800; line-height: 1.2; }
-    .info-item { margin-bottom: 20px; color: #666; font-size: 1.1rem; }
-
-    @media (max-width: 992px) {
-      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .btn-send:hover {
+      transform: scale(1.05);
     }
 
-    /* Ajuste Responsive de márgenes */
+    .info-title {
+      color: var(--contact-main);
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .info-h2 {
+      font-size: 2.5rem;
+      color: #2F2F2F;
+      margin-bottom: 30px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .info-item {
+      margin-bottom: 20px;
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 992px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
     @media (max-width: 768px) {
-      .char-float { display: none !important; }
-      .section-wrapper { padding: 0 30px !important; }
-      .quote-contact-gradient { padding: 60px 20px !important; }
-      .mission__title { font-size: 1.8rem !important; }
-      .info-h2 { font-size: 1.8rem; }
+      .char-float {
+        display: none !important;
+      }
+
+      .section-wrapper {
+        padding: 0 30px !important;
+      }
+
+      .quote-contact-gradient {
+        padding: 60px 20px !important;
+      }
+
+      .mission__title {
+        font-size: 1.8rem !important;
+      }
+
+      .info-h2 {
+        font-size: 1.8rem;
+      }
+
+      .contact-form {
+        padding: 28px 22px;
+      }
     }
   </style>
 </head>
@@ -120,8 +298,10 @@
   <header class="nav">
     <div class="nav__inner">
       <a class="brand" href="index.html">
-        <img src="img/logo.png" alt="Logo" class="brand__logo">
+        <img src="img/logo.png" alt="Logo Desktop" class="brand__logo brand__logo--desktop">
+        <img src="img/logo-2.png" alt="Logo Mobile" class="brand__logo brand__logo--mobile">
       </a>
+
       <nav class="menu">
         <a href="index.html">INICIO</a>
         <a href="nosotros.html">NOSOTROS</a>
@@ -130,10 +310,13 @@
         <a href="noticias.html">NOTICIAS</a>
         <a href="contacto.html" style="color: var(--orange);">CONTACTO</a>
       </nav>
+
       <div class="nav__right">
         <a class="btn-dona" href="donar.html">DONA</a>
-        <button class="nav__hamburger" id="btn-hamburger">
-          <span></span><span></span><span></span>
+        <button class="nav__hamburger" id="btn-hamburger" aria-label="Menú">
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
       </div>
     </div>
@@ -155,18 +338,24 @@
         
         <div class="contact-form" data-aos="fade-right">
           <form name="contacto-fundacion" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="contacto-fundacion">
+
             <div class="form-group">
               <input type="text" name="nombre" class="form-input" placeholder="Nombre Completo" required>
             </div>
+
             <div class="form-group">
               <input type="tel" name="telefono" class="form-input" placeholder="Teléfono" required>
             </div>
+
             <div class="form-group">
               <input type="email" name="email" class="form-input" placeholder="Email" required>
             </div>
+
             <div class="form-group">
               <textarea name="comentario" class="form-input" placeholder="Comentario" required></textarea>
             </div>
+
             <button type="submit" class="btn-send">
               <span>➜</span> Enviar
             </button>
@@ -174,15 +363,17 @@
         </div>
 
         <div class="contact-info" data-aos="fade-left">
-          <p class="info-title">Llámanos, Escríbenos O Visítenos.</p>
+          <p class="info-title">Llámanos, Escríbenos O Visítanos.</p>
           <h2 class="info-h2">Estaremos Encantados De Conocerte Y Ayudarte.</h2>
           
           <div class="info-item">
-            <strong>Lunes - Viernes:</strong> 9AM - 6PM
+            <strong>Lunes - Viernes:</strong> 10:00 a 14:00 y 15:30 a 17:00
           </div>
+
           <div class="info-item">
             <strong>Sábado:</strong> Cerrado
           </div>
+
           <div class="info-item">
             <strong>Domingo:</strong> Cerrado
           </div>
@@ -192,7 +383,7 @@
     </div>
   </section>
 
-<footer id="contacto" class="site-footer">
+  <footer id="contacto" class="site-footer">
     <div class="site-footer__color-bar"></div>
     <div class="site-footer__inner">
       <h2 class="site-footer__title">FUNDACIÓN MANOS EN ACCIÓN Y CAPACITACIÓN</h2>
@@ -200,30 +391,48 @@
         <div class="site-footer__logo-col">
           <img src="img/logo.png" alt="Logo Fundación Manos en Acción" class="site-footer__logo">
         </div>
+
         <div class="site-footer__social-col">
           <h3 class="site-footer__subtitle">¡Síguenos!</h3>
           <div class="site-footer__social-links">
             <a href="#" aria-label="Facebook" class="site-footer__icon-link">
-              <svg viewBox="0 0 24 24" fill="currentColor" class="site-footer__icon"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" class="site-footer__icon">
+                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/>
+              </svg>
             </a>
+
             <a href="#" aria-label="Instagram" class="site-footer__icon-link">
-              <svg viewBox="0 0 24 24" fill="currentColor" class="site-footer__icon"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor" class="site-footer__icon">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              </svg>
             </a>
           </div>
         </div>
+
         <div class="site-footer__contact-col">
           <h3 class="site-footer__subtitle">Contacto</h3>
           <ul class="site-footer__contact-list">
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="site-footer__icon-small"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="site-footer__icon-small">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+              </svg>
               <span>+56 44 297 0455</span>
             </li>
+
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="site-footer__icon-small"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-              <span>Buin@fundacionmanosenaccion.cl</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="site-footer__icon-small">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <span>fundacionmanosenaccionbuin@gmail.com</span>
             </li>
+
             <li>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="site-footer__icon-small"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="site-footer__icon-small">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
               <span>Ramon Freire 194, Buin Esquina Calle Carlos Condell</span>
             </li>
           </ul>
@@ -235,11 +444,16 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({ once: true, duration: 800 });
+
     const btnHamburger = document.getElementById('btn-hamburger');
     const menuMobile = document.querySelector('.menu');
-    btnHamburger.addEventListener('click', () => {
-      menuMobile.classList.toggle('menu--active');
-    });
+
+    if (btnHamburger && menuMobile) {
+      btnHamburger.addEventListener('click', () => {
+        menuMobile.classList.toggle('menu--active');
+        btnHamburger.classList.toggle('nav__hamburger--active');
+      });
+    }
   </script>
 </body>
 </html>
