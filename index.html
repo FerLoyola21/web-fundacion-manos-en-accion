@@ -211,6 +211,34 @@
     </div>
   </section>
 
+  <section class="infinite-gallery" id="gallery-trigger" style="cursor: pointer;">
+  <h2 class="gallery__title" data-aos="fade-up">NUESTROS MOMENTOS</h2>
+  
+  <div class="marquee">
+    <div class="marquee__content" id="marquee-inner">
+      </div>
+  </div>
+
+  <p style="color: #F2EEEB; text-align: center; margin-top: 15px; font-size: 0.8rem; opacity: 0.5;">
+    Haz clic para explorar la galería
+  </p>
+</section>
+
+<div id="gallery-panel" class="modal-custom">
+  <span class="modal-close" id="close-panel">&times;</span>
+
+  <div class="modal-custom__content">
+    <h2 class="gallery__title">GALERÍA COMPLETA</h2>
+    <div class="gallery-grid" id="grid-inner">
+      </div>
+  </div>
+</div>
+
+<div id="lightbox" class="lightbox">
+  <span class="modal-close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+</div>
+  
   <section id="noticias" class="news">
     <div class="news__inner">
       <h2 class="news__title" data-aos="zoom-in">NOTICIAS</h2>
@@ -276,23 +304,102 @@
   <script src="https://elfsightcdn.com/platform.js" async></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+document.addEventListener('DOMContentLoaded', () => {
+    // --- 1. INICIALIZACIÓN DE TERCEROS ---
     AOS.init({ once: true, duration: 800, offset: 100 });
 
+    // --- 2. PERSONAJES Y MENÚ ---
     const personajes = document.querySelectorAll('.about__char, .founder__decor');
     personajes.forEach(personaje => {
-      personaje.style.cursor = 'pointer';
-      personaje.addEventListener('click', () => {
-        personaje.classList.add('vibrando');
-        setTimeout(() => { personaje.classList.remove('vibrando'); }, 500);
-      });
+        personaje.style.cursor = 'pointer';
+        personaje.addEventListener('click', () => {
+            personaje.classList.add('vibrando');
+            setTimeout(() => { personaje.classList.remove('vibrando'); }, 500);
+        });
     });
 
     const btnHamburger = document.getElementById('btn-hamburger');
     const menuMobile = document.querySelector('.menu');
-    btnHamburger.addEventListener('click', () => {
-      menuMobile.classList.toggle('menu--active');
-      btnHamburger.classList.toggle('nav__hamburger--active');
+    if (btnHamburger) {
+        btnHamburger.addEventListener('click', () => {
+            menuMobile.classList.toggle('menu--active');
+            btnHamburger.classList.toggle('nav__hamburger--active');
+        });
+    }
+
+    // --- 3. CONFIGURACIÓN Y GENERACIÓN DE GALERÍA (190 FOTOS JPG) ---
+    const totalFotos = 190; 
+    const marqueeInner = document.getElementById('marquee-inner');
+    const gridInner = document.getElementById('grid-inner');
+
+    if (marqueeInner && gridInner) {
+        marqueeInner.innerHTML = '';
+        gridInner.innerHTML = '';
+
+        for (let i = 1; i <= totalFotos; i++) {
+            // ¡MISTERIO RESUELTO! Aquí está la ruta correcta con guion:
+            const ruta = `img/galeria-${i}.jpg`; 
+            
+            // Inyectamos en el scroll infinito (Solo las primeras 25)
+            if (i <= 25) {
+                marqueeInner.innerHTML += `<div class="marquee__item"><img src="${ruta}" alt="Foto ${i}"></div>`;
+            }
+            // Inyectamos las 190 en la grilla del panel con Lazy Loading
+            gridInner.innerHTML += `<img src="${ruta}" class="grid-img" alt="Foto ${i}" loading="lazy">`;
+        }
+        marqueeInner.innerHTML += marqueeInner.innerHTML;
+    }
+
+    // --- 4. LÓGICA DE MODALES (PANEL Y LIGHTBOX) ---
+    const trigger = document.getElementById('gallery-trigger');
+    const panel = document.getElementById('gallery-panel');
+    const cPanel = document.getElementById('close-panel');
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+
+    if (trigger && panel) {
+        trigger.addEventListener('click', () => {
+            panel.style.display = "block";
+            document.body.style.overflow = "hidden"; 
+        });
+    }
+
+    if (cPanel) {
+        cPanel.addEventListener('click', (e) => {
+            e.stopPropagation();
+            panel.style.display = "none";
+            document.body.style.overflow = "auto"; 
+        });
+    }
+
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('grid-img')) {
+            e.stopPropagation();
+            if (lb && lbImg) {
+                lb.style.display = "flex";
+                lbImg.src = e.target.src;
+            }
+        }
     });
-  </script>
+
+    if (lb) {
+        lb.addEventListener('click', (e) => {
+            if (e.target !== lbImg) {
+                lb.style.display = "none";
+            }
+        });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "Escape") {
+            if (lb) lb.style.display = "none";
+            if (panel) {
+                panel.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+    });
+});
+</script>
 </body>
 </html>
